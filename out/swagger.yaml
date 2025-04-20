@@ -1,38 +1,133 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: Product APIs
-  description: APIs for the Product Catalog Products
+  title: Example API with Style and Explode
   version: 1.0.0
 servers:
 - url: /
 paths:
-  /products:
+  /test:
     get:
-      tags:
-      - Products
-      summary: retrives product data
-      description: |
-        This endpoint retrives product data based on catalog owner.
-      operationId: getAllProducts
+      summary: Demonstrate query and header parameters with style/explode variations
       parameters:
-      - name: catalogOwner
+      - name: foo
         in: query
-        required: true
+        required: false
         style: form
         explode: true
         schema:
-          $ref: "#/components/schemas/Test"
+          type: array
+          items:
+            type: string
+      - name: bar
+        in: query
+        required: false
+        style: spaceDelimited
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: baz
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: X-Foo
+        in: header
+        required: false
+        style: simple
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: X-Bar
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: X-Baz
+        in: header
+        required: false
+        style: simple
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: X-FooBar
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
       responses:
-        default:
-          description: aa
+        "200":
+          description: Success
+          headers:
+            foo:
+              description: test
+              style: simple
+              explode: false
+              schema:
+                type: array
+                items:
+                  type: string
+            bar:
+              description: test
+              style: simple
+              explode: false
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: Demonstrate encoding with style/explode variations
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/test_body"
+            encoding:
+              file:
+                style: form
+                explode: true
+              fileWithOnlyStyle:
+                style: form
+              fileWithOnlyExplode:
+                style: form
+                explode: true
+              fileWithout:
+                contentType: "image/png, image/jpeg"
+                style: form
+      responses:
+        "200":
+          description: Success
 components:
   schemas:
-    Test:
+    test_body:
       type: object
       properties:
-        sizeCm:
-          $ref: "#/components/schemas/Test_sizeCm"
-    Test_sizeCm:
-      properties:
-        max:
-          type: integer
+        file:
+          type: string
+          format: binary
+        fileWithOnlyStyle:
+          type: string
+          format: binary
+        fileWithOnlyExplode:
+          type: string
+          format: binary
+        fileWithout:
+          type: string
+          format: binary

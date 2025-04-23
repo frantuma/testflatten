@@ -1,10 +1,11 @@
 openapi: 3.0.0
 info:
   title: Product APIs
-  description: APIs for the Product Catalog Products
+  description: APIs feor the Product Catalog Products
   version: 1.0.0
 servers:
-- url: /
+- url: https://virtserver.dev.swaggerhub.com/frantumaOrgDev/swaggerhub-custom-rules/1.0.0
+  description: SwaggerHub API Auto Mocking
 paths:
   /products:
     get:
@@ -31,8 +32,6 @@ components:
       type: object
       properties:
         sizeCm:
-          $ref: "#/components/schemas/Test_sizeCm"
-    Test_sizeCm:
-      properties:
-        max:
-          type: integer
+          properties:
+            max:
+              type: integer

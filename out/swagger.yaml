@@ -32,6 +32,8 @@ components:
       type: object
       properties:
         sizeCm:
-          properties:
-            max:
-              type: integer
+          $ref: "#/components/schemas/Test_sizeCm"
+    Test_sizeCm:
+      properties:
+        max:
+          type: integer

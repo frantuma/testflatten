@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Product APIs
-  description: APIs for the Product Catalog Products
+  description: APIs feor the Product Catalog Products
   version: 1.0.0
 servers:
 - url: /
